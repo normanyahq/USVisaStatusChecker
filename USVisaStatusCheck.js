@@ -15,7 +15,7 @@ function queryStatus(applicationID)
         document.getElementById("ctl00_ContentPlaceHolder1_txbCase").value=(applicationID);
         document.getElementById("ctl00_ContentPlaceHolder1_btnSubmit").click();
         clearInterval(window.timer1);
-        window.timer2 = setInterval(function(){queryCondition2();}, 1000)
+        window.timer2 = setInterval(function(){queryCondition2();}, 20000)
     }
     
     function queryCondition2(){
@@ -36,16 +36,22 @@ function queryStatus(applicationID)
         }
         if (alertInformation!='' && window.count!=0)
             alert(alertInformation);
-        
-        WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$ContentPlaceHolder1$ucApplicationStatusView$lnkCloseInbox", "", true, "", "", false, true))
-        window.count++;
         clearInterval(window.timer2);
+        WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$ContentPlaceHolder1$ucApplicationStatusView$lnkCloseInbox", "", true, "", "", false, true))
+        window.timer3 = setInterval(function(){queryCondition3();}, 1000)
+        
+    }
+    function queryCondition3() {
+        if (document.getElementById('ctl00_ContentPlaceHolder1_ucApplicationStatusView_pnlStatus').style.display != 'none')
+                return;
+        window.count++;
+        clearInterval(window.timer3);
         console.log('The No.' + window.count + ' Try:');
         console.log('Query Time: ' + Date(Date.now()));
         console.log('Status: ' + window.statusText);
         console.log('Updated Time: ' + window.updateTime);
     }
     
-    window.timer1 = setInterval(function(){queryCondition1();}, 1000)
+    window.timer1 = setInterval(function(){queryCondition1();}, 20000)
 }
 setInterval(queryStatus, intervalInSeconds * 1000, appID);
