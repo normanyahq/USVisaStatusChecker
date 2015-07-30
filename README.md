@@ -10,7 +10,7 @@ Usage:
 
 3. Copy the edited sourcecode.
 
-4. Open Chrome/Firefox or other web browser with developer's tool, and press F12 to show the browser console.
+4. Open the url of Visa Status Check page (https://github.com/normanyahq/USVisaStatusChecker.git) with Chrome/Firefox or other web browser with developer's tool, and press F12 to show the browser console.
 
 5. Paste the sourcecode into the console and run.
 
